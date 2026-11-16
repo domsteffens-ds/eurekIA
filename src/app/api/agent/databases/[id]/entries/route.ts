@@ -11,6 +11,7 @@ import { readAgentValues, resolveAgentValues } from "@/lib/agent_values";
 import { convertMarkdown, readMarkdown, readTitle, resolveRelationAnswers } from "@/lib/agent_write";
 import { configOf, createEntry } from "@/lib/databases";
 import { getPage } from "@/lib/pages";
+import { agentPublicationRefusal, withAgentDefaults } from "@/lib/publications";
 
 export async function POST(request: Request, ctx: RouteContext<"/api/agent/databases/[id]/entries">) {
   const agent = await requireAgent(request);
@@ -32,9 +33,11 @@ export async function POST(request: Request, ctx: RouteContext<"/api/agent/datab
   const answers = await resolveRelationAnswers(properties, values);
   const resolved = resolveAgentValues(properties, values, answers);
   if (!resolved.ok) return fail(400, resolved.error);
+  const refusal = agentPublicationRefusal(id, resolved.values);
+  if (refusal) return fail(400, refusal);
 
   const conversion = await convertMarkdown(markdown.value, requestOrigin(request));
-  const outcome = await createEntry(id, resolved.values, title.value, {
+  const outcome = await createEntry(id, withAgentDefaults(id, resolved.values), title.value, {
     properties: resolved.created.length ? resolved.properties : undefined,
     body: conversion.blocks,
   });

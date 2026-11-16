@@ -9,6 +9,7 @@ import { readAgentValues, resolveAgentValues } from "@/lib/agent_values";
 import { resolveRelationAnswers } from "@/lib/agent_write";
 import { configOf, updateEntry } from "@/lib/databases";
 import { getPage } from "@/lib/pages";
+import { agentPublicationRefusal } from "@/lib/publications";
 
 const PATCH_FIELDS = new Set(["values"]);
 
@@ -33,6 +34,8 @@ export async function PATCH(request: Request, ctx: RouteContext<"/api/agent/entr
   const answers = await resolveRelationAnswers(properties, values);
   const resolved = resolveAgentValues(properties, values, answers);
   if (!resolved.ok) return fail(400, resolved.error);
+  const refusal = agentPublicationRefusal(entry.dbId, resolved.values);
+  if (refusal) return fail(400, refusal);
 
   const outcome = await updateEntry(id, {
     values: resolved.values,

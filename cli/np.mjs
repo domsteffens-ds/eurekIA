@@ -3,7 +3,7 @@
 // agent », « Commande np »). Node 22, sans dépendance : le serveur convertit,
 // np ne fait que parler HTTP, lire et écrire des fichiers.
 //
-// Jeton : trousseau macOS (service notion-perso-agent), jamais affiché ;
+// Jeton : trousseau macOS (service instit-en-short-agent), jamais affiché ;
 // NP_JETON le remplace pour un essai contre une instance locale.
 // Serveur : --serveur ou NP_SERVEUR (défaut : production).
 // Modèle déclaré : --modele ou NP_AGENT_MODELE.
@@ -13,8 +13,8 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, join, relative, resolve } from "node:path";
 
-const DEFAULT_SERVER = "https://notion.antoninbareau.eu";
-const KEYCHAIN_SERVICE = "notion-perso-agent";
+const DEFAULT_SERVER = "https://eurekia-production.up.railway.app";
+const KEYCHAIN_SERVICE = "instit-en-short-agent";
 const VALUE_OPTIONS = new Set(["--vers", "--medias", "--modele", "--serveur", "--sous", "--titre"]);
 const FLAG_OPTIONS = new Set(["--json", "--aide", "-h", "--help"]);
 

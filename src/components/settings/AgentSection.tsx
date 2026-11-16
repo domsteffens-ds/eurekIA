@@ -24,7 +24,7 @@ type Request = {
 };
 
 const DATE = new Intl.DateTimeFormat("fr-BE", { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Brussels" });
-const SERVICE = "notion-perso-agent";
+const SERVICE = "instit-en-short-agent";
 
 function keychainCommand(token: string): string {
   return `security add-generic-password -U -a np -s ${SERVICE} -w '${token}'`;

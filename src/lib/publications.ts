@@ -171,3 +171,17 @@ export function hostOf(url: string | null): string {
     return "";
   }
 }
+
+// Accès agent : une tâche automatique dépose ses fiches, elle ne publie pas.
+// Le passage en « Publié » reste un geste fait à la main dans le Kanban.
+// Rend le refus à afficher, ou null ; `values` : valeurs déjà résolues par id.
+export function agentPublicationRefusal(dbId: string, values: Record<string, unknown>): string | null {
+  if (dbId !== PUBLICATIONS_ID || values[PUB.statut] !== STATUT.publie) return null;
+  return "Publication refusée : une fiche se publie à la main, en la glissant dans la colonne « Publié ».";
+}
+
+// Fiche déposée sans statut dans « Publications » : elle attend dans « À trier ».
+export function withAgentDefaults(dbId: string, values: Record<string, unknown>): Record<string, unknown> {
+  if (dbId !== PUBLICATIONS_ID || PUB.statut in values) return values;
+  return { ...values, [PUB.statut]: STATUT.trier };
+}

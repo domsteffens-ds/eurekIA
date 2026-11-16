@@ -25,6 +25,7 @@ import {
   type ShareNode,
 } from "./publication";
 import type { TreeRow } from "./tree";
+import { publicationsReach } from "./publications_query";
 import { vitrineReach } from "./vitrine_query";
 
 // newToken : 32 octets en base64url. Une adresse d'une autre forme n'atteint
@@ -135,8 +136,8 @@ export function forgetPublicReach(): void {
 }
 
 async function computePublicReach(): Promise<Set<string>> {
-  const [graph, vitrine] = await Promise.all([loadShareGraph(), vitrineReach()]);
-  const ids = new Set<string>(vitrine);
+  const [graph, vitrine, publications] = await Promise.all([loadShareGraph(), vitrineReach(), publicationsReach()]);
+  const ids = new Set<string>([...vitrine, ...publications]);
   for (const node of graph.values()) {
     if (!node.publicId) continue;
     for (const id of shareReach(graph, node.id).keys()) ids.add(id);

@@ -7,6 +7,7 @@
 import path from "node:path";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { ensureAccount } from "@/lib/account";
+import { ensurePublications } from "@/lib/publications_query";
 import { db } from "./index";
 
 export async function bootstrap() {
@@ -19,6 +20,7 @@ export async function bootstrap() {
       process.env.INITIAL_USERNAME,
       process.env.INITIAL_PASSWORD,
     );
+    await ensurePublications();
     console.log(created ? `Compte « ${username} » créé.` : "Migrations à jour, compte existant.");
   } catch (error) {
     console.error("Démarrage interrompu, migrations ou compte unique en échec :", error);

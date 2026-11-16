@@ -11,7 +11,8 @@ import { loginPath } from "@/lib/share";
 // /api/vitrine/*, reste sous session.
 // /api/favicon décide lui-même : tout hôte avec session, seulement ceux cités
 // par une mention publiée sans session.
-const PUBLIC_PATHS = [/^\/login$/, /^\/p\//, /^\/veille$/, /^\/api\/veille\//, /^\/api\/auth\//, /^\/api\/media\//, /^\/api\/favicon\//];
+// Site public : /accueil et /modeles, lus sans session.
+const PUBLIC_PATHS = [/^\/login$/, /^\/p\//, /^\/veille$/, /^\/accueil$/, /^\/modeles$/, /^\/api\/veille\//, /^\/api\/auth\//, /^\/api\/media\//, /^\/api\/favicon\//];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -24,6 +25,8 @@ export function proxy(request: NextRequest) {
     }
     // L'adresse demandée suit la connexion : un partage reçu du téléphone
     // (/share?url=…) ne se perd pas quand la session a expiré.
+    // La racine sans session mène au site public, pas à la connexion.
+    if (pathname === "/") return NextResponse.redirect(new URL("/accueil", request.url));
     return NextResponse.redirect(new URL(loginPath(pathname + request.nextUrl.search), request.url));
   }
 

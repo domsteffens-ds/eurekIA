@@ -2,18 +2,18 @@
    en portent la marque, la zone d'écriture reste calme. Ni fond Art Nouveau,
    ni cadre de page, ni coins ornés. */
 :root {
-  --bg: #fcfbf7; /* blanc cassé : on écrit dessus, pas sur le papier */
-  --bg-side: #f2efe6; /* paper */
-  --ink: #0d1617;
-  --ink-soft: #66655f; /* 5,1:1 sur paper, l'ancien gris n'en tenait que 3,9 */
-  --line: #e4dfd2;
-  --hover: #e9e4d6;
-  --accent: #127676; /* teal, 4,7:1 sur paper */
-  --accent-soft: #e3efec;
+  --bg: #ffffff; /* blanc cassé : on écrit dessus, pas sur le papier */
+  --bg-side: #efe9df; /* paper */
+  --ink: #2b2825;
+  --ink-soft: #5d5a55; /* 5,1:1 sur paper, l'ancien gris n'en tenait que 3,9 */
+  --line: #e2dbcf;
+  --hover: #e4dccd;
+  --accent: #24343a; /* teal, 4,7:1 sur paper */
+  --accent-soft: #e4e9ea;
   --danger: #b8431a; /* orange assombri : l'orange vif ne tient pas en texte */
   --danger-soft: #fbece4;
-  --warm: #e3a535; /* jaune : une seule action principale par écran */
-  --hit: rgb(227 165 53 / 45%); /* terme trouvé, un cran plus franc que la sélection */
+  --warm: #b19e84; /* jaune : une seule action principale par écran */
+  --hit: rgb(177 158 132 / 55%); /* terme trouvé, un cran plus franc que la sélection */
   --font-body: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-label: var(--font-oswald), "Arial Narrow", sans-serif;
   /* Coins asymétriques doux : une surface et ce qu'elle contient inversent
@@ -3902,8 +3902,8 @@ mark.hit {
   height: 380px;
   --border-radius: 0;
   --shadow: none;
-  --rgb-accent: 18, 118, 118;
-  --rgb-background: 252, 251, 247;
+  --rgb-accent: 36, 52, 58;
+  --rgb-background: 255, 255, 255;
 }
 
 .icon-image-tab {

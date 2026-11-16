@@ -129,7 +129,7 @@ export function VitrineSheet({ entry, prev, next, url, onClose, onGo, onTag }: P
           {entry.description ? <p className="vitrine-sheet-desc">{entry.description}</p> : null}
           {entry.hasNotes && html !== "" ? (
             <section className="vitrine-sheet-notes" aria-labelledby="vitrine-sheet-notes-title">
-              <h3 id="vitrine-sheet-notes-title">Notes d&apos;Antonin</h3>
+              <h3 id="vitrine-sheet-notes-title">Mes notes</h3>
               {html ? (
                 <div className="public-body" onClick={onNotesClick} dangerouslySetInnerHTML={{ __html: html }} />
               ) : failed ? (

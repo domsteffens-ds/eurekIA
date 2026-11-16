@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald" });
 
 export const metadata: Metadata = {
-  title: "notion_perso",
+  title: "Instit en short",
   description: "Pages, bases et veille, auto-hébergées",
   // Icônes rangées dans public/icons/, que le proxy laisse passer sans
   // session : l'écran de connexion les affiche aussi.
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     icon: [{ url: "/icons/icon-32.png", sizes: "32x32", type: "image/png" }],
     apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
   },
-  appleWebApp: { capable: true, title: "notion_perso", statusBarStyle: "default" },
+  appleWebApp: { capable: true, title: "Instit en short", statusBarStyle: "default" },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f2efe6",
+  themeColor: "#efe9df",
   // Le clavier d'un téléphone réduit la page au lieu de la recouvrir : ce que
   // BlockNote demande en console, et ce qui garde la saisie visible.
   interactiveWidget: "resizes-content",

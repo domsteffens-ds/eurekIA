@@ -117,7 +117,7 @@ export function VitrineProposal({ open, entries, onClose, onSee }: Props) {
       if (result.accepted.length) {
         setReason("");
         setName("");
-        setNotice({ text: "Merci ! Antonin examinera ta proposition.", tone: "ok" });
+        setNotice({ text: "Merci ! Je regarderai ta proposition.", tone: "ok" });
       } else if (!kept.length) {
         setNotice({ text: "Ces ressources sont déjà dans la veille.", tone: "error" });
       }

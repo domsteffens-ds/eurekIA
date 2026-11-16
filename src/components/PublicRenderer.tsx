@@ -110,7 +110,7 @@ export async function PublicFooter() {
         ❧
       </span>
       <p>
-        Made by{" "}
+        Un site{" "}
         <a href={CV_URL} target="_blank" rel="noopener noreferrer">
           {AUTHOR_NAME}
         </a>
@@ -122,7 +122,7 @@ export async function PublicFooter() {
             </a>
           </>
         ) : null}{" "}
-        avec l&apos;aide essentielle d&apos;un ou plusieurs LLM
+        · bâti sur notion_perso d&apos;Antonin Bareau
       </p>
     </footer>
   );

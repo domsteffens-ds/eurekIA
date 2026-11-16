@@ -21,6 +21,7 @@ import {
 import { saveFile } from "./storage";
 import { domainOf } from "./unfurl";
 import { fetchRemoteImage } from "./unfurl_fetch";
+import { PUB, PUBLICATIONS_ID, STATUT, TYPE } from "./publications";
 import { parseConfig } from "./views";
 
 // Les propriétés de l'ancien Vide-cerveau : une base qui porte le même nom et
@@ -49,6 +50,23 @@ export async function captureIntoDatabase(dbId: string, shared: SharedCapture): 
     .where(and(eq(pages.id, dbId), isNull(pages.trashedAt)));
   if (!target || target.type !== "database") return { ok: false, status: 404, error: "Base de destination introuvable" };
   const properties = parseConfig(target.dbConfig).properties;
+
+  // Base « Publications » : le lien capturé devient une actualité à trier,
+  // ses champs remplis directement plutôt que versés dans le corps.
+  if (shared.url && dbId === PUBLICATIONS_ID) {
+    const values: Record<string, unknown> = { [PUB.lien]: shared.url, [PUB.type]: TYPE.actu, [PUB.statut]: STATUT.trier };
+    const resume = (shared.text?.trim() || shared.description || "").slice(0, 5000);
+    if (resume) values[PUB.resume] = resume;
+    values[PUB.source] = (shared.source || domainOf(shared.url)).slice(0, 100);
+    const known = new Set(properties.map((prop) => prop.id));
+    for (const key of Object.keys(values)) if (!known.has(key)) delete values[key];
+    const title = (shared.title?.trim() || domainOf(shared.url)).slice(0, CAPTURE_TITLE_MAX);
+    const created = await createEntry(dbId, values, title);
+    if (!created.ok) return created;
+    if (!created.id) return { ok: false, status: 404, error: "Entrée introuvable après création" };
+    if (shared.image) await attachCover(created.id, shared.image);
+    return { ok: true, id: created.id };
+  }
 
   if (shared.url) {
     const values: Values = { url: shared.url };

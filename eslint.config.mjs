@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Extension Chrome : JavaScript de navigateur, hors de l'application.
+    "extension/**",
   ]),
 ]);
 

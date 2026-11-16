@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Instit en short · Capture</title>
+<style>
+  body { font: 15px/1.5 system-ui, sans-serif; color: #2b2825; max-width: 520px; margin: 32px auto; padding: 0 20px; }
+  h1 { font-size: 22px; margin: 0 0 16px; }
+  label { display: block; font-weight: 600; margin-bottom: 6px; }
+  input { width: 100%; box-sizing: border-box; padding: 8px 10px; font: inherit; border: 2px solid #b19e84; }
+  button { margin-top: 14px; padding: 8px 18px; font: inherit; color: #fff; background: #24343a; border: 0; cursor: pointer; }
+  p { color: #5d5a55; }
+</style>
+</head>
+<body>
+  <h1>Instit en short · Capture</h1>
+  <label for="site">Adresse de votre site</label>
+  <input id="site" type="url" placeholder="https://…">
+  <button id="save">Enregistrer</button>
+  <p id="etat" role="status"></p>
+  <p>L'extension ouvre l'écran « Capturer » de ce site. Connectez-vous y une fois ; elle ne garde aucun mot de passe.</p>
+  <script src="options.js"></script>
+</body>
+</html>
